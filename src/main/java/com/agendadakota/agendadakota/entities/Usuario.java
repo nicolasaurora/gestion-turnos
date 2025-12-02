@@ -1,6 +1,5 @@
 package com.agendadakota.agendadakota.entities;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -40,9 +40,13 @@ public class Usuario {
     @Column(nullable = false)
     private String apellido;
 
-    // Rol: ADMIN, PROFESIONAL, PACIENTE
     @Column(nullable = false)
-    private String rol;
+    private String telefono;
+
+    // Rol: ADMIN, PROFESIONAL, PACIENTE
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Rol rol;
 
     // Relación con Turnos (como paciente)
     @OneToMany(mappedBy = "paciente")

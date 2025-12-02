@@ -18,27 +18,24 @@ import java.util.Set;
 @Entity
 @Table(name = "jornadas")
 public class Jornada {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "profesional_id", nullable = false)
-    private Usuario profesional;
-
-    @Column(nullable = false)
+    private String nombre; // ej "Jornada de depilacion definitiva" (tipo/etiqueta)
     private LocalDate fecha;
-
-    @Column(nullable = false)
     private LocalTime horaInicio;
-
-    @Column(nullable = false)
     private LocalTime horaFin;
 
-    //Relacion con turnos
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "servicio_id")
+    private Servicio servicio; // la jornada está pensada para ese servicio (o podés permitir null y admitir varios servicios por jornada con otra entidad)
+
+    private String descripcion; // opcional
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profesional_id")
+    private Usuario profesional;
+
     @OneToMany(mappedBy = "jornada")
     private Set<Turno> turnos;
-
-
 }

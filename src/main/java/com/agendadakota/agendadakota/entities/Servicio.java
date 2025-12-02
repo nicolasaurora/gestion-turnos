@@ -29,6 +29,9 @@ public class Servicio {
     @Column(nullable = false)
     private Double precio;
 
+    @Column(name = "duracion_minutos", nullable = false)
+    private Integer duracionMinutos;
+
     //Relacion con turnos
     @OneToMany(mappedBy = "servicio")
     private Set<Turno> turnos;
