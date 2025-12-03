@@ -44,7 +44,7 @@ public class Usuario {
     private String telefono;
 
     // Rol: ADMIN, PROFESIONAL, PACIENTE
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private Rol rol;
 

@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/servicios")
+@RequestMapping("/agenda/servicios")
 public class ServicioController {
 
     private final ServicioService ServicioService;
@@ -24,7 +24,7 @@ public class ServicioController {
     public ResponseEntity<ServicioDTO> crear(@RequestBody ServicioDTO dto) {
         ServicioDTO creado = ServicioService.crear(dto);
         return ResponseEntity
-                .created(URI.create("/agenda" + creado.getId()))
+                .created(URI.create("/agenda/servicios" + creado.getId()))
                 .body(creado);
     }
 
