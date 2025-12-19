@@ -1,5 +1,7 @@
 package com.agendadakota.agendadakota.service;
 
+import com.agendadakota.agendadakota.dto.DisponibilidadDiaDTO;
+import com.agendadakota.agendadakota.dto.DisponibilidadSemanaDTO;
 import com.agendadakota.agendadakota.dto.TurnoDTO;
 
 import java.util.List;
@@ -13,7 +15,10 @@ public interface TurnoService {
     void eliminar(Long id);
 
     // Logica de negocio
-    TurnoDTO reservar(Long turnoId, Long pacienteId);
+    TurnoDTO reservar(Long turnoId);
     TurnoDTO cancelar(Long turnoId);
+
+    DisponibilidadDiaDTO obtenerDisponibilidadPorDia(String fechaStr);
+    DisponibilidadSemanaDTO obtenerDisponibilidadSemana(String fechaInicio);
 
 }

@@ -5,6 +5,7 @@ import com.agendadakota.agendadakota.dto.UsuarioDTO;
 import com.agendadakota.agendadakota.entities.Rol;
 import com.agendadakota.agendadakota.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -20,7 +21,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // Crear
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<UsuarioDTO> crear(@RequestBody UsuarioDTO dto) {
         UsuarioDTO creado = usuarioService.crear(dto);
@@ -30,31 +31,31 @@ public class UsuarioController {
                 .body(creado);
     }
 
-    // Actualizar
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDTO> actualizar(@PathVariable Long id, @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.actualizar(id, dto));
     }
 
-    // Obtener por id
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/id/{id}")
     public ResponseEntity<UsuarioDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.obtener(id));
     }
 
-    // Listar todos
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<UsuarioDTO>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
-    // Listar por rol
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/rol/{rol}")
     public ResponseEntity<List<UsuarioDTO>> listarPorRol(@PathVariable Rol rol) {
         return ResponseEntity.ok(usuarioService.listarPorRol(rol));
     }
 
-    // Eliminar
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<UsuarioDTO> eliminar(@PathVariable Long id) {
         usuarioService.eliminar(id);
